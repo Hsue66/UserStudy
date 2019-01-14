@@ -1,0 +1,29 @@
+{
+  "name": "userstudy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hsue66/UserStudy.git"
+  },
+  "author": "Hsue66",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hsue66/UserStudy/issues"
+  },
+  "homepage": "https://github.com/Hsue66/UserStudy#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cytoscape": "^3.3.2",
+    "cytoscape-expand-collapse": "^3.1.2",
+    "cytoscape-node-html-label": "^1.1.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.4.4"
+  }
+}
