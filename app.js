@@ -1,6 +1,7 @@
 var express = require("express"),
     app = express();
 var bodyParser = require("body-parser");
+var session = require('express-session');
 
 app.use(bodyParser.urlencoded({extended: true}));
 const PORT = process.env.PORT || 3000;
@@ -11,14 +12,16 @@ app.use('/script', express.static(__dirname + '/node_modules/'));
 
 app.use('/cytoData', express.static(__dirname + '/cytoData'));
 
+app.use(session({
+    secret: '@#@$MYSIGN#@$#$',
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.set("view engine", "ejs");
 
-var dataset = {
-  '0':['greece.json','greece2.json'],
-  '1':['greece2.json','greece.json'],
-}
-var id = '';
-
+var router = require('./router/main')(app);
+/*
 app.get("/",function(req,res){
   res.render("main");
 });
@@ -47,7 +50,7 @@ app.post("/getId",function(req,res){
   id = req.body.id;
   res.redirect("/bestMap");
 });
-
+*/
 app.listen(PORT, function(){
   console.log("SERVER HAS STARTED!!!");
 });
