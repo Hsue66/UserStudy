@@ -58,7 +58,6 @@ var styles = [
 
 var dataset = document.getElementById('cy').getAttribute('value');
 
-//document.getElementById('incoh').innerHTML="hello";
 
 fetch('/cytoData/'+dataset,{mode:'no-cors'})
 .then(function(res){
@@ -167,16 +166,37 @@ fetch('/cytoData/'+dataset,{mode:'no-cors'})
   });
 
   var clickBefore;
-  var incohNodes = [];
+
   // click시, article update
   cy.on("click","node", function(event){
     var node = event.target;
     document.getElementById("title").innerHTML = node.data("name");
     document.getElementById("date").innerHTML = (node.data("date")).replace('T',' ');
     document.getElementById("contents").innerHTML = node.data("contents");
-    incohNodes.push(node.data("name"));
-    document.getElementById('incoh').innerHTML= incohNodes;
-    node.style('background-color',"red")
+  });
+
+  var incohNodes = [];
+  var incohNIds = [];
+  //우 클릭시 중복
+  cy.on("cxttap","node", function(event){
+    var node = event.target;
+    var nodename = node.data("name")
+    var nodeid = node.data("id")
+    if(incohNodes.includes(nodename)){
+      var idx = incohNodes.indexOf(nodename)
+      incohNodes.splice(idx,1);
+      incohNIds.splice(idx,1);
+      document.getElementById('incoh').innerHTML = incohNodes;
+      document.getElementById('articles').value = incohNIds;
+      node.style('background-color',"#969696")
+    }
+    else{
+      incohNodes.push(nodename);
+      incohNIds.push(nodeid);
+      document.getElementById('incoh').innerHTML= incohNodes;
+      document.getElementById('articles').value = incohNIds;
+      node.style('background-color',"red")
+    }
   });
 
   var api = cy.expandCollapse('get');

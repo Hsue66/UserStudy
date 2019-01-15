@@ -20,6 +20,14 @@ module.exports = function(app){
     res.redirect("eachMap");
   });
 
+  app.post("/next",function(req,res){
+    var sess = req.session;
+    console.log(sess.q2)
+    sess.q2 = req.body.articles;
+    console.log(sess.q2)
+    res.send('NENENEEN')
+  });
+
   app.get('/eachMap',function(req,res){
     var sess = req.session;
     console.log(sess.dataset);
@@ -28,8 +36,6 @@ module.exports = function(app){
 
   app.get("/cohMap/:data",function(req,res){
     console.log(req.params.data)
-    //console.log(dataset[0][1]);
-    //res.render("cohMap",{dataset:dataset[0][1]});
     res.render("cohMap",{dataset:req.params.data});
   });
 
@@ -55,6 +61,7 @@ module.exports = function(app){
         sess.name = users[username]["name"];
         sess.dataset = users[username]["dataset"];
         sess.q1 = '';
+        sess.q2 = [];
         //res.json(result);
         res.redirect("bestMap")
     });
