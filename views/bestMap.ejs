@@ -1,0 +1,58 @@
+<% include partials/header %>
+<style type="text/css">
+      .pink{
+        background-color: pink;
+        border: 1px solid purple;
+      }
+
+      .orange{
+        background-color: orange;
+        border: 1px dashed red;
+        height: 50px;
+      }
+
+      .cy{
+          background-color: #edeff2;
+          height: 500px;
+        }
+    </style>
+<div class="container">
+  <div class="">
+    QUESTION
+    <% for(var i=0; i<dataset.length; i++){%>
+      <h1><%=dataset[i]%></h1>
+    <%}
+    %>
+    <form action="/next" method="post">
+      <input type="radio" name="Map" value="MapA">
+      <label for="MapA">Map A</label>
+      <input type="radio" name="Map" value="MapB">
+      <label for="MapB">Map B</label>
+      <button class="btn">Submit</button>
+    </form>
+  </div>
+  <div class="row">
+    <% for(var i=0; i<dataset.length; i++){ %>
+    <div class="col-sm-6" id="datadiv<%=i%>" value="<%=dataset[i]%>">
+      <div class="row" >
+        <div class="col-lg-12 cy" id="cy<%=i%>">
+
+        </div>
+        <div class="col-lg-12 orange">
+          <h2 id="title<%=i%>"></h2>
+          <h4 id="date<%=i%>"></h4>
+          <p class="text-center" id="contents<%=i%>">
+            키워드를 검색하신 후, 뉴스를 클릭하시면 기사를 살펴볼 수 있습니다
+          </p>
+        </div>
+      </div>
+    </div>
+    <%}
+    %>
+  </div>
+
+</div>
+
+<script src="js/cyto0.js"></script>
+<script src="js/cyto1.js"></script>
+<% include partials/footer %>

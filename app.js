@@ -17,19 +17,35 @@ var dataset = {
   '0':['greece.json','greece2.json'],
   '1':['greece2.json','greece.json'],
 }
+var id = '';
 
 app.get("/",function(req,res){
   res.render("main");
 });
 
-app.get("/start",function(req,res){
-  res.render("start");
+app.get("/bestMap",function(req,res){
+  console.log(id);
+  res.render("bestMap",{dataset:dataset[id]});
+});
+
+app.get("/cohMap",function(req,res){
+  console.log(dataset[0][1]);
+  res.render("cohMap",{dataset:dataset[0][1]});
+});
+
+app.get("/redTimeline",function(req,res){
+  console.log(dataset[0][1]);
+  res.render("redTimeline",{dataset:dataset[0][1]});
+});
+
+app.post("/next",function(req,res){
+  id = req.body.Map;
+  res.send(id);
 });
 
 app.post("/getId",function(req,res){
-  var id = req.body.id;
-  console.log(id);
-  res.redirect("/start");
+  id = req.body.id;
+  res.redirect("/bestMap");
 });
 
 app.listen(PORT, function(){

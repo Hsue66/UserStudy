@@ -1,0 +1,43 @@
+<% include partials/header %>
+<style type="text/css">
+      .pink{
+        background-color: pink;
+        border: 1px solid purple;
+      }
+
+      .orange{
+        background-color: orange;
+        border: 1px dashed red;
+        height: 50px;
+      }
+
+      .cy{
+          background-color: #edeff2;
+          height: 500px;
+        }
+</style>
+
+<div class="container">
+  <div class="">
+    QUESTION
+  </div>
+  <p id ="incoh"></p>
+  <div class="container">
+      <div class="cy" id="cy" value="<%=dataset%>">
+
+      </div>
+    </div>
+
+    <div class="container" >
+      <div class="title text-center">
+        <h2 id="title"></h2>
+        <h4 id="date"></h4>
+      </div>
+      <p class="article-content text-center" id="contents">
+        키워드를 검색하신 후, 뉴스를 클릭하시면 기사를 살펴볼 수 있습니다
+      </p>
+    </div>
+</div>
+
+<script src="js/cohcyto.js"></script>
+<% include partials/footer %>
