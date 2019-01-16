@@ -11,10 +11,10 @@
     var mapb = '/cohMap/'+dataset[1]
     var locA = "location.href='"+mapa+"'";
     var locB = "location.href='"+mapb+"'";
-    console.log(locA)
+    //console.log(locA)
   %>
-  <button type="button" class="btn btn-primary btn-lg active" onclick="<%=locA%>">Map A</button>
-  <button type="button" class="btn btn-default btn-lg active" onclick="<%=locB%>">Map B</button>
+  <button type="button" class="btn btn-primary btn-lg active" onclick="location.href='/cohMap/0'">Map A</button>
+  <button type="button" class="btn btn-default btn-lg active" onclick="location.href='/cohMap/1'">Map B</button>
 
 </div>
 

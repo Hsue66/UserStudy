@@ -9,25 +9,18 @@
 
 <div class="container">
   <div class="question">
-    <%
-      var q = '흐름에 올바르지 않은 기사는?'
-      if(redflag)
-        q =  '중복되는 기사는?';
-    %>
-    <h2><%=q%></h2>
-    <form action="/next" method="post">
-
-      <div class="answers" id ="incoh">
+    QUESTIOn redun
+    <form action="/sendQ3" method="post">
+      <div class="answers" id="redtl">
 
       </div>
-      <input type="hidden" name="articles" id="articles">
+      <input type="hidden" name="topics" id="topics">
       <input type="hidden" name="idx" value="<%=idx%>">
-      <input type="hidden" name="redflag" value="<%=redflag%>">
       <button class="btn">Next</button>
     </form>
   </div>
 
-    <div class="container">
+  <div class="container">
       <div class="cy" id="cy" value="<%=dataset%>">
 
       </div>
@@ -44,5 +37,5 @@
     </div>
 </div>
 
-<script src="/js/cohcyto.js"></script>
+<script src="/js/redcyto.js"></script>
 <% include partials/footer0 %>

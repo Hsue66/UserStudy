@@ -10,33 +10,79 @@ module.exports = function(app){
 
   app.get('/bestMap',function(req,res){
     var sess = req.session;
-    console.log(sess.dataset);
+    //console.log(sess.dataset);
     res.render("bestMap",{dataset:sess.dataset});
   });
 
   app.post("/sendQ1",function(req,res){
     var sess = req.session;
-    sess.q1 = req.body.Map;
-    res.redirect("eachMap");
-  });
+    if(req.body.Map === 'MapA')
+      sess.Qd12 = sess.dataset[0];
+    else
+      sess.Qd12 = sess.dataset[1];
 
-  app.post("/next",function(req,res){
-    var sess = req.session;
-    console.log(sess.q2)
-    sess.q2 = req.body.articles;
-    console.log(sess.q2)
-    res.send('NENENEEN')
+    res.redirect("eachMap");
   });
 
   app.get('/eachMap',function(req,res){
     var sess = req.session;
-    console.log(sess.dataset);
+    //console.log(sess.dataset);
     res.render("eachMap",{dataset:sess.dataset});
   });
 
-  app.get("/cohMap/:data",function(req,res){
-    console.log(req.params.data)
-    res.render("cohMap",{dataset:req.params.data});
+  app.get("/cohMap/:idx",function(req,res){
+    console.log(req.params.idx)
+    var sess = req.session;
+    res.render("cohMap",{idx:req.params.idx,dataset:sess.dataset[req.params.idx],redflag:0});
+  });
+
+  app.post("/next",function(req,res){
+    var sess = req.session;
+
+    if(parseInt(req.body.idx))
+      sess.Qd2[parseInt(req.body.redflag)] = req.body.articles;
+    else
+      sess.Qd1[parseInt(req.body.redflag)] = req.body.articles;
+
+    console.log("next")
+    console.log(req.body.articles)
+    console.log("------------------")
+    console.log(sess.Qd1)
+    console.log(sess.Qd2)
+
+    if(parseInt(req.body.redflag))
+      res.redirect("/redTLMap/"+req.body.idx);
+    else
+      res.redirect("/redMap/"+req.body.idx);
+  });
+
+  app.get("/redMap/:idx",function(req,res){
+    //res.send(req.params.data)
+    var sess = req.session;
+    res.render("cohMap",{idx:req.params.idx,dataset:sess.dataset[req.params.idx],redflag:1});
+  });
+
+  app.get("/redTLMap/:idx",function(req,res){
+    var sess = req.session;
+    res.render("redTLMap",{idx:req.params.idx,dataset:sess.dataset[req.params.idx]});
+  });
+
+  app.post("/sendQ3",function(req,res){
+    var sess = req.session;
+
+    if(parseInt(req.body.idx))
+      sess.Qd2[2] = req.body.topics;
+    else
+      sess.Qd1[2] = req.body.topics;
+
+    console.log("Q3")
+    console.log(req.body.topics)
+    console.log("------------------")
+    console.log(sess.Qd1)
+    console.log(sess.Qd2)
+
+    res.send("CONN")
+    //res.redirect("/redMap/"+req.body.idx);
   });
 
   app.post("/login",function(req,res){
@@ -60,8 +106,9 @@ module.exports = function(app){
         sess.username = username;
         sess.name = users[username]["name"];
         sess.dataset = users[username]["dataset"];
-        sess.q1 = '';
-        sess.q2 = [];
+        sess.Qd12 = "";
+        sess.Qd1 = users[username]["Qd1"];
+        sess.Qd2 = users[username]["Qd2"];
         //res.json(result);
         res.redirect("bestMap")
     });

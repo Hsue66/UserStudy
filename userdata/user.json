@@ -2,7 +2,9 @@
 	"hsue": {
 		"password": "1",
 		"name": "hsue",
-    "dataset":["greece.json","greece2.json"]
+    "dataset":["greece.json","greece2.json"],
+    "Qd1":["","",""],
+    "Qd2":["","",""]
 	},
   "velopert": {
       "password": "123123",
