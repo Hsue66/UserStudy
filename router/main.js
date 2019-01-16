@@ -81,8 +81,30 @@ module.exports = function(app){
     console.log(sess.Qd1)
     console.log(sess.Qd2)
 
-    res.send("CONN")
-    //res.redirect("/redMap/"+req.body.idx);
+    res.redirect("/conMap/"+req.body.idx);
+  });
+
+  app.get("/conMap/:idx",function(req,res){
+    var sess = req.session;
+    res.render("conMap",{idx:req.params.idx,dataset:sess.dataset[req.params.idx]});
+  });
+
+  app.post("/sendQ4",function(req,res){
+    var sess = req.session;
+
+    if(parseInt(req.body.idx))
+      sess.Qd2[3] = req.body.Con_articles;
+    else
+      sess.Qd1[3] = req.body.Con_articles;
+
+    console.log("Q4")
+    console.log(req.body.Con_articles)
+    console.log("------------------")
+    console.log(sess.Qd1)
+    console.log(sess.Qd2)
+
+    res.send("CONNNN")
+    //res.redirect("/conMap/"+req.body.idx);
   });
 
   app.post("/login",function(req,res){
